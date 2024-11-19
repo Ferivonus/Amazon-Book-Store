@@ -1,11 +1,12 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using MySql.Data.MySqlClient;
 using System.Data;
-using ASPCommerce.Models;
+using AmazonWebApp.Models;
 using System.Data.Common;
+using AmazonWebApp.models;
 
 
-namespace ASPCommerce.Controllers
+namespace AmazonWebApp.Controllers
 {
     [ApiController]
     [Route("[controller]")]
@@ -40,11 +41,11 @@ namespace ASPCommerce.Controllers
         {
             try
             {
-                _logger.LogInformation("Starting to retrieve categories from Books table.");
+                _logger?.LogInformation("Starting to retrieve categories from Books table.");
 
                 using var conn = new MySqlConnection(_connectionString);
                 await conn.OpenAsync();
-                _logger.LogInformation("Database connection established.");
+                _logger?.LogInformation("Database connection established.");
 
                 string query = "SELECT DISTINCT Category FROM Books";
 
@@ -62,11 +63,11 @@ namespace ASPCommerce.Controllers
 
                 if (categoryCount == 0)
                 {
-                    _logger.LogInformation("No categories found.");
+                    _logger?.LogInformation("No categories found.");
                 }
                 else
                 {
-                    _logger.LogInformation($"Successfully retrieved {categoryCount} categories.");
+                    _logger?.LogInformation($"Successfully retrieved {categoryCount} categories.");
                 }
 
                 return Ok(categories);
@@ -74,8 +75,8 @@ namespace ASPCommerce.Controllers
             catch (Exception ex)
             {
                 // Log detailed exception information
-                _logger.LogError($"An error occurred while retrieving categories: {ex.Message}");
-                _logger.LogError($"Stack Trace: {ex.StackTrace}");
+                _logger?.LogError($"An error occurred while retrieving categories: {ex.Message}");
+                _logger?.LogError($"Stack Trace: {ex.StackTrace}");
 
                 // Return internal server error
                 return StatusCode(500, "An error occurred while processing the request");
@@ -199,7 +200,7 @@ namespace ASPCommerce.Controllers
             }
             catch (Exception ex)
             {
-                _logger.LogError($"An error occurred while adding order: {ex.Message}");
+                _logger?.LogError($"An error occurred while adding order: {ex.Message}");
                 return StatusCode(500, "An error occurred while processing the request");
             }
         }
@@ -241,7 +242,7 @@ namespace ASPCommerce.Controllers
             }
             catch (Exception ex)
             {
-                _logger.LogError($"An error occurred while retrieving order: {ex.Message}");
+                _logger?.LogError($"An error occurred while retrieving order: {ex.Message}");
                 return StatusCode(500, "An error occurred while processing the request");
             }
         }
@@ -281,7 +282,7 @@ namespace ASPCommerce.Controllers
             }
             catch (Exception ex)
             {
-                _logger.LogError($"An error occurred while retrieving orders by user: {ex.Message}");
+                _logger?.LogError($"An error occurred while retrieving orders by user: {ex.Message}");
                 return StatusCode(500, "An error occurred while processing the request");
             }
         }
@@ -323,7 +324,7 @@ namespace ASPCommerce.Controllers
             }
             catch (Exception ex)
             {
-                _logger.LogError($"An error occurred while retrieving order details: {ex.Message}");
+                _logger?.LogError($"An error occurred while retrieving order details: {ex.Message}");
                 return StatusCode(500, "An error occurred while processing the request");
             }
         }
@@ -364,7 +365,7 @@ namespace ASPCommerce.Controllers
             }
             catch (Exception ex)
             {
-                _logger.LogError($"An error occurred while retrieving order details by product: {ex.Message}");
+                _logger?.LogError($"An error occurred while retrieving order details by product: {ex.Message}");
                 return StatusCode(500, "An error occurred while processing the request");
             }
         }
@@ -401,7 +402,7 @@ namespace ASPCommerce.Controllers
             }
             catch (Exception ex)
             {
-                _logger.LogError($"An error occurred while adding comment: {ex.Message}");
+                _logger?.LogError($"An error occurred while adding comment: {ex.Message}");
                 return StatusCode(500, "An error occurred while processing the request");
             }
         }
@@ -444,7 +445,7 @@ namespace ASPCommerce.Controllers
             }
             catch (Exception ex)
             {
-                _logger.LogError($"An error occurred while retrieving comments: {ex.Message}");
+                _logger?.LogError($"An error occurred while retrieving comments: {ex.Message}");
                 return StatusCode(500, "An error occurred while processing the request");
             }
         }

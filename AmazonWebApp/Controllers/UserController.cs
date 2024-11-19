@@ -1,13 +1,13 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using MySql.Data.MySqlClient;
 using System.Data;
-using ASPCommerce.Models;
-using ASPCommerce.Helpers; 
+using AmazonWebApp.Helpers;
 using System.Net.Mail;
 using System.Net;
+using AmazonWebApp.models;
 
 
-namespace ASPCommerce.Controllers
+namespace AmazonWebApp.Controllers
 {
     [ApiController]
     [Route("[controller]")]
@@ -41,7 +41,7 @@ namespace ASPCommerce.Controllers
                          FROM Users u
                          INNER JOIN UserAuthentication ua ON u.UserId = ua.UserId";
 
-                _logger.LogInformation("Executing SQL query to fetch user accounts");
+                _logger?.LogInformation("Executing SQL query to fetch user accounts");
 
                 using var cmd = new MySqlCommand(query, conn);
                 using var reader = await cmd.ExecuteReaderAsync();
@@ -70,7 +70,7 @@ namespace ASPCommerce.Controllers
                         IsEmailVerified = reader.GetBoolean(reader.GetOrdinal("IsEmailVerified"))
                     };
 
-                    _logger.LogInformation($"Adding user: {user.UserId}, Username: {user.Username}");
+                    _logger?.LogInformation($"Adding user: {user.UserId}, Username: {user.Username}");
                     users.Add(user);
                 }
 
@@ -80,7 +80,7 @@ namespace ASPCommerce.Controllers
                 }
                 else
                 {
-                    _logger.LogInformation($"Successfully retrieved {rowCount} user accounts");
+                    _logger?.LogInformation($"Successfully retrieved {rowCount} user accounts");
                 }
 
                 return Ok(users);
@@ -88,8 +88,8 @@ namespace ASPCommerce.Controllers
             catch (Exception ex)
             {
                 // Log detailed error information
-                _logger.LogError($"An error occurred while retrieving user accounts: {ex.Message}");
-                _logger.LogError($"Stack Trace: {ex.StackTrace}");
+                _logger?.LogError($"An error occurred while retrieving user accounts: {ex.Message}");
+                _logger?.LogError($"Stack Trace: {ex.StackTrace}");
 
                 // Return internal server error
                 return StatusCode(500, "An error occurred while processing the request");

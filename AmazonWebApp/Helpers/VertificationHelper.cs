@@ -1,4 +1,4 @@
-﻿namespace ASPCommerce.Helpers
+﻿namespace AmazonWebApp.Helpers
 {
     public class VertificationHelper
     {

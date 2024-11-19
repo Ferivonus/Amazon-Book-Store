@@ -1,18 +1,18 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 
-namespace ASPCommerce.Models
+namespace AmazonWebApp.models
 {
     public class CustomEmailValidationAttribute : ValidationAttribute
     {
-        public override bool IsValid(object value)
+        public override bool IsValid(object? value)
         {
             if (value == null || string.IsNullOrWhiteSpace(value.ToString()))
             {
                 return false;
             }
 
-            string email = value.ToString().ToLower();
+            string email = value.ToString()!.ToLower();
 
             // Check if email is in the correct format
             if (!new EmailAddressAttribute().IsValid(email))
@@ -29,6 +29,7 @@ namespace ASPCommerce.Models
             return true;
         }
     }
+
 
     public class UserModel
     {

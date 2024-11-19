@@ -2,7 +2,7 @@
 using System.Security.Cryptography;
 using System.Text;
 
-namespace ASPCommerce.Helpers
+namespace AmazonWebApp.Helpers
 {
     public static class PasswordHelper
     {

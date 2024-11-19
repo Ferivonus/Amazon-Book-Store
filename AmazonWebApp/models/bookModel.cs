@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace ASPCommerce.Models
+namespace AmazonWebApp.Models
 {
     public class BookModel
     {
@@ -13,103 +13,103 @@ namespace ASPCommerce.Models
         public required string Author { get; set; }
 
         [Required(ErrorMessage = "Description is required")]
-        public  string Description { get; set; }
+        public required string Description { get; set; }
 
         [Required(ErrorMessage = "Price is required")]
         [Range(0, double.MaxValue, ErrorMessage = "Price must be a non-negative value")]
-        public decimal Price { get; set; }
+        public required decimal Price { get; set; }
 
         [Required(ErrorMessage = "Stock quantity is required")]
         [Range(0, int.MaxValue, ErrorMessage = "Stock quantity must be a non-negative integer")]
-        public int StockQuantity { get; set; }
+        public required int StockQuantity { get; set; }
 
         [Required(ErrorMessage = "Category ID is required")]
-        public int CategoryId { get; set; }
+        public required int CategoryId { get; set; }
 
-        public string CategoryName { get; set; }
+        public required string CategoryName { get; set; }
 
         [Required(ErrorMessage = "ISBN is required")]
-        public string ISBN { get; set; }
+        public required string ISBN { get; set; }
 
-        public DateTime PublishedDate { get; set; }
+        public required DateTime PublishedDate { get; set; }
 
-        public string Publisher { get; set; }
+        public required string Publisher { get; set; }
 
         [Url(ErrorMessage = "Invalid URL format")]
-        public string CoverImageUrl { get; set; }
+        public required string CoverImageUrl { get; set; }
 
         [Required(ErrorMessage = "Date added is required")]
-        public DateTime DateAdded { get; set; }
+        public required DateTime DateAdded { get; set; }
     }
 
     public class CategoryModel
     {
-        public int Id { get; set; }
+        public required int Id { get; set; }
 
         [Required(ErrorMessage = "Category name is required")]
-        public string Name { get; set; }
+        public required string Name { get; set; }
 
         [Required(ErrorMessage = "Description is required")]
-        public string Description { get; set; }
+        public required string Description { get; set; }
     }
 
     public class OrderModel
     {
-        public int Id { get; set; }
+        public required int Id { get; set; }
 
-        public int UserId { get; set; }
+        public required int UserId { get; set; }
 
         [Required(ErrorMessage = "Total amount is required")]
         [Range(0, double.MaxValue, ErrorMessage = "Total amount must be a non-negative value")]
-        public decimal TotalAmount { get; set; }
+        public required decimal TotalAmount { get; set; }
 
         [Required(ErrorMessage = "Order date is required")]
-        public DateTime OrderDate { get; set; }
+        public required DateTime OrderDate { get; set; }
 
-        public string OrderStatus { get; set; }
+        public required string OrderStatus { get; set; }
 
-        public List<OrderDetailModel> OrderDetails { get; set; }
+        public required List<OrderDetailModel> OrderDetails { get; set; }
     }
 
     public class AddOrderModel
     {
-        public int UserId { get; set; }
-        public decimal TotalAmount { get; set; }
-        public List<OrderDetailModel> OrderDetails { get; set; }
+        public required int UserId { get; set; }
+        public required decimal TotalAmount { get; set; }
+        public required List<OrderDetailModel> OrderDetails { get; set; }
     }
 
     public class OrderDetailModel
     {
-        public int ProductId { get; set; }
+        public required int ProductId { get; set; }
 
-        public string ProductTitle { get; set; }
+        public required string ProductTitle { get; set; }
 
         [Required(ErrorMessage = "Quantity is required")]
         [Range(1, int.MaxValue, ErrorMessage = "Quantity must be a positive integer")]
-        public int Quantity { get; set; }
+        public required int Quantity { get; set; }
 
         [Required(ErrorMessage = "Unit price is required")]
         [Range(0, double.MaxValue, ErrorMessage = "Unit price must be a non-negative value")]
-        public decimal UnitPrice { get; set; }
+        public required decimal UnitPrice { get; set; }
     }
 
     public class CartModel
     {
-        public int UserId { get; set; }
+        public required int UserId { get; set; }
 
-        public List<CartItemModel> Items { get; set; }
+        public required List<CartItemModel> Items { get; set; }
 
-        public decimal TotalPrice { get; set; }
+        public required decimal TotalPrice { get; set; }
     }
 
     public class CartItemModel
     {
-        public int ProductId { get; set; }
+        public required int ProductId { get; set; }
 
-        public string Title { get; set; }
+        public required string Title { get; set; }
 
-        public decimal Price { get; set; }
+        public required decimal Price { get; set; }
 
-        public int Quantity { get; set; }
+        public required int Quantity { get; set; }
     }
 }
