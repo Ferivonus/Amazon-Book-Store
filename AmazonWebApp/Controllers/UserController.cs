@@ -550,7 +550,7 @@ namespace ASPCommerce.Controllers
                     return BadRequest("Invalid User Id");
                 }
 
-                using (MySqlConnection connection = new MySqlConnection(_connectionString))
+                using (MySqlConnection connection = new(_connectionString))
                 {
                     connection.Open();
 
@@ -658,12 +658,12 @@ namespace ASPCommerce.Controllers
                     return BadRequest("Invalid user id in the cookie");
                 }
 
-                using (MySqlConnection connection = new MySqlConnection(_connectionString))
+                using (MySqlConnection connection = new(_connectionString))
                 {
                     connection.Open();
                     // Check if the email and password match
                     string query = "SELECT COUNT(*) FROM Users WHERE UserId = @UserId AND Email = @Email AND Password = @Password";
-                    using (MySqlCommand command = new MySqlCommand(query, connection))
+                    using (MySqlCommand command = new(query, connection))
                     {
                         command.Parameters.AddWithValue("@UserId", userId);
                         command.Parameters.AddWithValue("@Email", deleteAccountModel.Email);
@@ -678,7 +678,7 @@ namespace ASPCommerce.Controllers
 
                     // Email, password, and user id match, proceed with deletion
                     string deleteQuery = "DELETE FROM Users WHERE UserId = @UserId";
-                    using (MySqlCommand deleteCommand = new MySqlCommand(deleteQuery, connection))
+                    using (MySqlCommand deleteCommand = new(deleteQuery, connection))
                     {
                         deleteCommand.Parameters.AddWithValue("@UserId", userId);
                         int rowsAffected = deleteCommand.ExecuteNonQuery();
@@ -742,7 +742,7 @@ namespace ASPCommerce.Controllers
                         {
                             // Update the user's email verification status
                             string updateQuery = "UPDATE Users SET IsEmailVerified = 1 WHERE Email = @Email";
-                            using (MySqlCommand updateCommand = new MySqlCommand(updateQuery, connection))
+                            using (MySqlCommand updateCommand = new(updateQuery, connection))
                             {
                                 updateCommand.Parameters.AddWithValue("@Email", email);
                                 int rowsAffected = updateCommand.ExecuteNonQuery();
